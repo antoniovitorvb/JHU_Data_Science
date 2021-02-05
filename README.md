@@ -1,3 +1,3 @@
-# datasciencecoursera
-JHU Course Project for Data Scientist Tools 
-  - week 4
+# Data Science Specialization
+## Johns Hopkins University
+JHU Course Project for Data Scientist Tools
