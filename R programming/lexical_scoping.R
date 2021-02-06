@@ -26,3 +26,8 @@ g<-function(x){
     x*y # if this Y doesn't exists on global, 
         # it will return an error because this Y was not defined like in f()
 }
+
+h<-function(x){
+    x<-2 # although this does not change the valeu of a global var
+    x
+}
