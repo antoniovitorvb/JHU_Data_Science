@@ -6,17 +6,19 @@ if (!require("readr")) {install.packages("readr")}
 library(readr)
 
 pollutantmean <- function(directory, pollutant, id = 1:332){
+        
+        t0<-Sys.time()
      allFiles <- list.files(path = directory, full.names = TRUE)
      selectedData <- data.frame() # Initializes dataframe
      
      for (i in id){
           if (tolower(pollutant) == "sulfate"){
-               rawdata <- read_csv(directory,
+               rawdata <- read_csv(allFiles[i],
                                    col_types = do.call(cols_only,
                                                        list(Date = "D", 
                                                             sulfate = 'n')))
           } else if (tolower(pollutant) == "nitrate") {
-               rawdata <- read_csv(directory,
+               rawdata <- read_csv(allFiles[i],
                                    col_types = do.call(cols_only,
                                                        list(Date = "D", 
                                                             nitrate = 'n')))
@@ -27,4 +29,5 @@ pollutantmean <- function(directory, pollutant, id = 1:332){
      
      colnames(selectedData) <- c("Date", "pollutant")
      mean(selectedData$pollutant, na.rm = TRUE)
+     Sys.time()-t0
 }
