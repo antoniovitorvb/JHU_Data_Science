@@ -10,6 +10,6 @@
 
 # my recursive factorial
 fact <- function(x){
-     if (x==0) return(1)
+     if (x==0 || x==1) return(1)
      else return(x*fact(x-1))
 }
