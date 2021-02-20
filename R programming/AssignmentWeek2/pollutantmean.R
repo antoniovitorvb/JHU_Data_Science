@@ -6,8 +6,7 @@ if (!require("readr")) {install.packages("readr")}
 library(readr)
 
 pollutantmean <- function(directory, pollutant, id = 1:332){
-        
-        t0<-Sys.time()
+
      allFiles <- list.files(path = directory, full.names = TRUE)
      selectedData <- data.frame() # Initializes dataframe
      
@@ -29,5 +28,4 @@ pollutantmean <- function(directory, pollutant, id = 1:332){
      
      colnames(selectedData) <- c("Date", "pollutant")
      mean(selectedData$pollutant, na.rm = TRUE)
-     Sys.time()-t0
 }
