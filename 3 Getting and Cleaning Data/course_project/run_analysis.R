@@ -7,7 +7,7 @@ unzip("rawData.zip")
 
 # if package not installed
 if(!require(dplyr)) install.packages("dplyr")
-if(!require(reshape2)) install.packages("dplyr")
+if(!require(reshape2)) install.packages("reshape2")
 
 library(dplyr)
 library(reshape2)
