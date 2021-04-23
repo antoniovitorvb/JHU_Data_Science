@@ -1,0 +1,31 @@
+My 1st knitr Document
+=================================
+
+Author: Antonio Vitor  
+Date: `r Sys.Date()`
+
+This is some "text chunk"
+
+Here is a R code chunk:
+```{r}
+set.seed(1)
+x<-rnorm(100)
+mean(x)
+```
+
+To compilate Python chunks, 1st you must use the Reticulate library:
+
+```{r}
+library(reticulate)
+```
+
+Now, you may use Python
+
+```{python}
+import numpy as np
+import math
+
+a = np.log2(8)
+print(a)
+print(math.pi)
+```
