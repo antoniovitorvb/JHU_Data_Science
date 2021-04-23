@@ -1,11 +1,11 @@
 ---
 title: "Reproducible Research: Peer Assessment 1"
+author: "Antonio Vitor Villas Boas"
 output: 
   html_document:
     keep_md: true
 ---
-Author: Antonio Vitor Villas Boas  
-last update: 2021-04-23 11:59:09  
+last update: 2021-04-23 12:26:59  
 
 ## Loading and preprocessing the data
 
@@ -15,9 +15,9 @@ library(dplyr)
 
 if (!("rawData" %in% ls())){
      fileURL <- "https://d396qusza40orc.cloudfront.net/repdata%2Fdata%2Factivity.zip"
-     download.file(fileURL, destfile = "act_data.zip")
+     download.file(fileURL, destfile = "activity.zip")
      
-     rawData <- unzip("act_data.zip") %>%
+     rawData <- unzip("activity.zip") %>%
           read.csv()
 }
 

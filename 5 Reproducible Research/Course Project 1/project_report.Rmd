@@ -1,10 +1,10 @@
 ---
 title: "Reproducible Research: Peer Assessment 1"
+author: "Antonio Vitor Villas Boas"
 output: 
   html_document:
     keep_md: true
 ---
-Author: Antonio Vitor Villas Boas  
 last update: `r Sys.time()`  
 
 ## Loading and preprocessing the data

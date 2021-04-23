@@ -9,6 +9,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
+<meta name="author" content="Antonio Vitor Villas Boas" />
 
 
 <title>Reproducible Research: Peer Assessment 1</title>
@@ -164,21 +165,21 @@ pre code {
 
 
 <h1 class="title toc-ignore">Reproducible Research: Peer Assessment 1</h1>
+<h4 class="author">Antonio Vitor Villas Boas</h4>
 
 </div>
 
 
-<p>Author: Antonio Vitor Villas Boas<br />
-last update: 2021-04-23 11:59:09</p>
+<p>last update: 2021-04-23 12:26:59</p>
 <div id="loading-and-preprocessing-the-data" class="section level2">
 <h2>Loading and preprocessing the data</h2>
 <pre class="r"><code>library(dplyr)
 
 if (!(&quot;rawData&quot; %in% ls())){
      fileURL &lt;- &quot;https://d396qusza40orc.cloudfront.net/repdata%2Fdata%2Factivity.zip&quot;
-     download.file(fileURL, destfile = &quot;act_data.zip&quot;)
+     download.file(fileURL, destfile = &quot;activity.zip&quot;)
      
-     rawData &lt;- unzip(&quot;act_data.zip&quot;) %&gt;%
+     rawData &lt;- unzip(&quot;activity.zip&quot;) %&gt;%
           read.csv()
 }
 
