@@ -14,10 +14,6 @@ library(ggplot2)
 library(lubridate)
 library(tidyverse)
 
-dates <- stormdata$BGN_DATE %>%
-     str_remove(pattern = "0:00:00") %>%
-     mdy()
-
 ## 1. Across the United States, which types of events 
 # (as indicated in the EVTYPE variable) 
 # are most harmful with respect to population health?
@@ -201,7 +197,7 @@ states <- mutate(states,
                  COST = (PROPDMG + CROPDMG)/1E9, # in millions of USD
                  HARM = (FATALITIES + INJURIES)/100)
 
-png("economic_health_analysis.png")
+png("economic_health_analysis.png", width = 600)
 ggplot(states,
        aes(x = COST,
            y = HARM,
