@@ -1,0 +1,105 @@
+---
+title: "Regression Models Course Project"
+author: "Antonio Vitor Villas Boas"
+date: "07/02/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Executive Summary
+
+In this article it will be presented an analysis comparing automatic and manual transmission impacts on Miles Per Gallon (MPG) and quantify the MPG difference difference between the two transmissions.
+
+The data set to be studied is the `mtcars`. The data was extracted from the 1974 Motor Trend US magazine, and comprises fuel consumption and 10 aspects of automobile design and performance for 32 automobiles (1973–74 models).
+
+
+```{r warning=FALSE, message=FALSE, cache=TRUE}
+library(ggplot2)
+library(dplyr)
+library(regclass)
+
+data(mtcars)
+
+mtcars$am <- factor(mtcars$am, labels = c("Automatic", "Manual"))
+```
+
+Now let's make some exploratory analysis:
+
+```{r}
+ggplot(mtcars,
+       aes(x = am,
+           y = mpg,
+           fill = am)) +
+     geom_boxplot() +
+     labs(x = "", fill = "")
+
+fit <- lm(mpg ~ am, mtcars)
+summary(fit)
+```
+
+Considering only the transmission as a predictor we can conclude that manual transmission cars have a better MPG performance over automatic transmission ones.
+
+Although there are other variables that may impact this conclusion such as weight, number of cylinders, gross horsepower etc. Let's find out then which ones can truly impact on MPG.
+
+```{r, cache=TRUE}
+full_fit <- lm(mpg ~ ., mtcars)
+
+summary(full_fit)
+```
+
+It is important to have in mind that excluding correlated variables can lead to biased conclusions, including uncorrelated predictors can inflate the variance of the model. To measure this inflation, the `VIF` function calculates the Variation Inflation Factors of all predictors in a regressions model.
+
+First let's use a different fit to the model as an comparison to `full_fit`. One with and extra predictors: `cyl`.
+
+```{r}
+fit2 <- lm(mpg ~ am + cyl, mtcars)
+VIF(fit2)
+
+VIF(full_fit)
+```
+
+comparing both am Variation Inflation Factors it shows that `am` is much more inflated when using all predictors in the model.
+
+The function `step` in useful to select which predictors are better correlated to the model with the lowest Akaike Information Criterion (AIC).
+
+```{r, cache=TRUE}
+final_fit <- step(full_fit, direction = "backward", trace = F)
+final_fit
+
+VIF(final_fit)
+```
+
+This shows that the lowest IAC = 61.31 and the VIF = `r VIF(final_fit)[3]` using three predictors: `wt`, `qsec` and `am`.
+
+With these coefficients, we can conclude that Manual transmission cars get 2.936 more MPG on average than automatic ones.
+
+the confidence interval for this statment is:
+```{r}
+confint(final_fit)['amManual',]
+```
+
+
+\newpage
+# Appendix
+
+mpg ~ cyl with number of cylinders considered.
+```{r}
+mtcars$cyl <- factor(mtcars$cyl)
+
+ggplot(mtcars,
+       aes(x = cyl,
+           y = mpg,
+           fill = am)) +
+     geom_boxplot() +
+     labs(fill = "Transmission",
+          x = "Number of Cylinders")
+```
+
+Null Hypothesis test
+```{r}
+t.test(mpg~am, mtcars)
+```
+
