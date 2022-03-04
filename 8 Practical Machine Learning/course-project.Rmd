@@ -1,0 +1,83 @@
+---
+title: "Prediction Assignment WriteUp"
+author: "Antonio Vitor Villas Boas"
+date: "28/02/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Backgroung
+
+Using devices such as Jawbone Up, Nike FuelBand, and Fitbit it is now possible to collect a large amount of data about personal activity relatively inexpensively. These type of devices are part of the quantified self movement – a group of enthusiasts who take measurements about themselves regularly to improve their health, to find patterns in their behavior, or because they are tech geeks. One thing that people regularly do is quantify how much of a particular activity they do, but they rarely quantify how well they do it. In this project, your goal will be to use data from accelerometers on the belt, forearm, arm, and dumbell of 6 participants. They were asked to perform barbell lifts correctly and incorrectly in 5 different ways. More information is available from the website here: http://web.archive.org/web/20161224072740/http:/groupware.les.inf.puc-rio.br/har (see the section on the Weight Lifting Exercise Dataset).
+
+Libraries used:
+
+```{r warning=FALSE, message=FALSE}
+library(caret)
+library(dplyr)
+library(rattle)
+```
+
+## Getting and cleaning the data
+
+The data for this project come from this source: http://groupware.les.inf.puc-rio.br/har.
+
+```{r}
+trainURL <- "https://d396qusza40orc.cloudfront.net/predmachlearn/pml-training.csv"
+testURL <- "https://d396qusza40orc.cloudfront.net/predmachlearn/pml-testing.csv"
+
+download.file(trainURL,
+              destfile = "pml-training.csv")
+download.file(testURL,
+              destfile = "pml-testing.csv")
+
+train_set <- read.csv("pml-training.csv",
+                      na.strings = c("", "#DIV/0!", "NA"))
+test_set <- read.csv("pml-testing.csv",
+                     na.strings = c("", "#DIV/0!", "NA"))
+
+training <- train_set[ , colMeans(is.na(train_set)) < 0.9] %>%
+     select(-(X:num_window))
+```
+
+## Creating the Model
+
+Four models were compared to see which one fits best the data. In order not to extend this report, the choosing method was separeted. See [modeltesting.R](https://github.com/antoniovitorvb/JHU_Data_Science/blob/main/8%20Practical%20Machine%20Learning/modeltesting.R) for model accuracy comparison script.
+
+```{r, cache=TRUE}
+set.seed(123)
+
+# Splitting the train_set into its own Training and Testing sets
+
+inTrain  <- createDataPartition(train_set$classe,
+                                p = 0.7,
+                                list = FALSE)
+training <- training[inTrain, ]
+testing <- training[-inTrain, ]
+
+control <- trainControl(method = "cv",
+                        number = 3, # 3-fold cross validation
+                        verboseIter = FALSE)
+
+# Creating the Random Forest Model
+
+RF_model <- train(classe ~ ., 
+                  data = training,
+                  method = "rf",
+                  trControl = control,
+                  tuneLength = 5)
+
+RF_pred <- predict(RF_model, testing)
+print(confusionMatrix(RF_pred, factor(testing$classe))$overall[1]) # Accuracy
+```
+
+# Results
+
+The prediction for the 20 different test cases [test_set] were:
+
+```{r}
+print(predict(RF_model, test_set))
+```
