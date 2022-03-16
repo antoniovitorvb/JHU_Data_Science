@@ -1,0 +1,24 @@
+- Class: meta
+  Course: My First Course
+  Lesson: Lesson 2
+  Author: Antonio Vitor
+  Type: Standard
+  Organization: your organization's name goes here
+  Version: 2.4.5
+
+- Class: mult_question
+  Output: Which of these shapes has four sizes?
+  AnswerChoices: Square; Circle; Hexagon
+  CorrectAnswer: Square
+  AnswerTests: omnitest(correctVal= 'Square')
+  Hint: You should know this...
+
+- Class: figure
+  Output: This is a simples graph.
+  Figure: fig1.R
+  FigureType: new
+
+- Class: figure
+  Output: I added a line!
+  Figure: fig2.R
+  FigureType: add

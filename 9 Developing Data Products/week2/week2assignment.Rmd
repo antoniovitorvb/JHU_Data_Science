@@ -1,0 +1,32 @@
+---
+title: "Week 2 Assignment"
+author: "Antonio Vitor"
+date: "March 14th 2022"
+output: html_document
+---
+
+```{r setup, include=FALSE, echo=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(dplyr)
+library(leaflet)
+```
+
+```{r, echo=FALSE}
+londonIcon <- makeIcon(
+     iconUrl = "https://cdn-icons-png.flaticon.com/512/6502/6502331.png",
+     iconWidth = 70*215/230, iconHeight = 70,
+     iconAnchorX = 70*215/230, iconAnchorY = 70
+)
+
+flaticonSite <- "<a href='https://www.flaticon.com/free-icons/london' title='london icons'>London icons created by Freepik - Flaticon</a>"
+
+bigBen <- data.frame(lat = 51.510357,
+                 lng = -0.116773)
+
+bigBen %>%
+     leaflet() %>%
+     addTiles() %>%
+     addMarkers(icon = londonIcon,
+                popup = flaticonSite)
+```
+
