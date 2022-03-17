@@ -1,0 +1,8 @@
+"0","set.seed(2016-07-21)"
+"0",""
+"0","df <- data.frame(dtime = 1:100,"
+"0","                 temperature = rnorm(n = 100, mean = 30, sd = 5),"
+"0","                 pressure = rnorm(100))"
+"0","#temp <- rnorm(n = 100, mean = 30, sd = 5)"
+"0","#pressue <- rnorm(100)"
+"0","#dtime <- 1:100"

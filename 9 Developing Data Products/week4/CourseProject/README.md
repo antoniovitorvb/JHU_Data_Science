@@ -9,4 +9,12 @@ This project is the final peer assessment for the [Developing Data Products](htt
 
 ## Description
 
-This `Shiny` application aims to create interactive graphics for energy consumption analysis of the [Electric Energy Commercialization Hall (CCEE)](https://www.ccee.org.br/web/guest/dados-e-analises/consumo) of Brazil.
+This `Shiny` application aims to create interactive graphics for the `mtcars` data set.
+
+## Important Links
+
+- Shiny Application: <br>
+https://antoniovitor.shinyapps.io/jhu-ddp-shinyapplication/
+
+- Reproducible Pitch Presentation:  
+https://rpubs.com/antoniovitor/jhu-ddp-courseproject

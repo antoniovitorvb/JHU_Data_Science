@@ -1,0 +1,13 @@
+name: jhu-ddp-shinyapplication
+title: jhu-ddp-shinyapplication
+username:
+account: antoniovitor
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 5871356
+bundleId: 5693558
+url: https://antoniovitor.shinyapps.io/jhu-ddp-shinyapplication/
+when: 1647477121.33069
+lastSyncTime: 1647477121.33069
+asMultiple: FALSE
+asStatic: FALSE

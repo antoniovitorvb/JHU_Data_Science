@@ -1,35 +1,65 @@
 ---
-title: 'Developing Data Products - Course Project: Shiny Application and Reproducible Pitch'
+subtitle: 'Developing Data Products - Course Project'
+title: "Shiny Application and Reproducible Pitch"
 author: "Antonio Vitor"
-date: "March 15th 2022"
+date: "March 16th 2022"
 output: ioslides_presentation
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
+library(shiny)
+library(dplyr)
+library(plotly)
+
+data(mtcars)
+
+mtcars <- mtcars %>%
+     mutate(am = factor(am,
+                        labels = c("Automatic", "Manual")))
 ```
 
-## R Markdown
+## Introduction
 
-This is an R Markdown presentation. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+This project is the final peer assessment for the [Developing Data Products](https://www.coursera.org/learn/data-products?specialization=jhu-data-science) course from the Johns Hopkins Data Science Specialization.
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document.
+The Shiny Application is available at: <br>
+https://antoniovitor.shinyapps.io/jhu-ddp-shinyapplication/
 
-## Slide with Bullets
+The source files for this projects are available at: <br>
+https://github.com/antoniovitorvb/JHU_Data_Science/tree/main/9%20Developing%20Data%20Products/week4/CourseProject
 
-- Bullet 1
-- Bullet 2
-- Bullet 3
+## Application Overview
 
-## Slide with R Output
+In this app it is possible to manipulate the MPG ~ Weight scatter plot of the `mtcars` dataset by selecting the range of MPG.
 
-```{r cars, echo = TRUE}
-summary(cars)
-```
+It can also show the regression line for the data points available separated by the transmission type of the cars.
 
-## Slide with Plot
+## How the app works
 
-```{r pressure}
-plot(pressure)
+Side Panel:  
+- Select the range of MPG  
+- Select if you want the regression line to be shown  
+
+Main Panel:  
+- See the scatter plot with the corresponding range of MPG  
+- See (or not) the regression line for each type of transmission  
+
+## Demonstration
+
+Here is an example of the plot without the user input values
+
+```{r, message=FALSE}
+gg <- ggplot(mtcars,
+             aes(x = wt,
+                 y = mpg,
+                 color = am)) +
+     geom_point() +
+     geom_smooth(method = "lm") +
+     labs(x = "Weight (1000 lbs)",
+          y = "MPG",
+          color = "Transmission Type")
+
+ggplotly(gg)
 ```
 

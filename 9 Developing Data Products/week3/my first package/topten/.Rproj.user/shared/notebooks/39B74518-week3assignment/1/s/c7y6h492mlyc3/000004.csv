@@ -1,0 +1,7 @@
+"0","plot_ly(data = df,"
+"0","        x = ~temperature,"
+"0","        y = ~pressure,"
+"0","        z = ~dtime,"
+"0","        type = ""scatter3d"","
+"0","        mode = ""markers"","
+"0","        color = ~temperature)"
